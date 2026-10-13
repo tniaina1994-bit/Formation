@@ -1,0 +1,43 @@
+<div class="flex h-screen bg-gray-100">
+  <aside class="w-64 bg-gray-800 text-white flex flex-col">
+    <div class="p-4 border-b border-gray-700">
+      <h1 class="text-xl font-bold">Admin Panel</h1>
+      <p class="text-gray-400 text-sm">Gestionnaire</p>
+    </div>
+    <nav class="flex-1 p-4 space-y-2">
+      <a routerLink="/admin/dashboard" routerLinkActive="bg-gray-900" class="flex items-center px-4 py-2 rounded hover:bg-gray-700 transition-colors">
+        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+        Dashboard
+      </a>
+      <a routerLink="/admin/users" routerLinkActive="bg-gray-900" class="flex items-center px-4 py-2 rounded hover:bg-gray-700 transition-colors">
+        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 014 4V7.5h1.25a2.25 2.25 0 012.25 2.25v9.5a2.25 2.25 0 01-2.25 2.25h-9.5A2.25 2.25 0 015.5 19.25v-9.5a2.25 2.25 0 012.25-2.25H10V8.354a4 4 0 014-4z"></path></svg>
+        Utilisateurs
+      </a>
+      <a routerLink="/admin/projects" routerLinkActive="bg-gray-900" class="flex items-center px-4 py-2 rounded hover:bg-gray-700 transition-colors">
+        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+        Projets
+      </a>
+      <a routerLink="/admin/tasks" routerLinkActive="bg-gray-900" class="flex items-center px-4 py-2 rounded hover:bg-gray-700 transition-colors">
+        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+        Tâches
+      </a>
+    </nav>
+    <div class="p-4 border-t border-gray-700">
+        <div class="flex items-center mb-3">
+          <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white font-semibold">
+            {{ getUserInitials() }}
+          </div>
+          <div class="ml-3">
+            <p class="text-sm font-medium">{{ getUserFullName() }}</p>
+            <p class="text-xs text-gray-400">{{ user()?.email }}</p>
+          </div>
+        </div>
+      <button (click)="logout()" class="w-full px-4 py-2 bg-red-600 hover:bg-red-700 rounded text-sm transition-colors">
+        Déconnexion
+      </button>
+    </div>
+  </aside>
+  <main class="flex-1 overflow-auto p-8">
+    <router-outlet></router-outlet>
+  </main>
+</div>

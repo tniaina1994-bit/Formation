@@ -1,0 +1,59 @@
+<div class="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+  <h2 class="text-2xl font-bold mb-4 text-gray-800">🤖 IA gratuite - Chat local</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    Aucun compte ni token requis. Le modèle s'exécute directement dans votre navigateur via WebGPU.
+    Nécessite un navigateur compatible (Chrome, Edge).
+  </p>
+
+  @if (loading) {
+    <div class="mb-4 p-4 bg-blue-50 rounded">
+      <p class="text-blue-700">{{ error || 'Chargement du modèle IA (première fois, peut prendre quelques minutes)...' }}</p>
+    </div>
+  }
+
+  @if (error && !loading) {
+    <div class="mb-4 p-4 bg-red-50 rounded text-red-700">
+      {{ error }}
+    </div>
+  }
+
+  <div class="border border-gray-200 rounded-lg mb-4 h-96 overflow-y-auto p-4 bg-gray-50">
+    @for (msg of messages; track $index) {
+      <div class="mb-3" [class]="msg.role === 'user' ? 'text-right' : 'text-left'">
+        <span class="inline-block px-4 py-2 rounded-lg" 
+              [class]="msg.role === 'user' ? 'bg-blue-600 text-white' : 'bg-white border border-gray-200 text-gray-800'">
+          {{ msg.content }}
+        </span>
+      </div>
+    }
+    @if (isGenerating) {
+      <div class="text-left mb-3">
+        <span class="inline-block px-4 py-2 rounded-lg bg-white border border-gray-200 text-gray-800">
+          <span class="inline-block w-2 h-2 bg-gray-400 rounded-full animate-pulse mr-1"></span>
+          En train d'écrire...
+        </span>
+      </div>
+    }
+  </div>
+
+  <div class="flex gap-2">
+    <textarea
+      [(ngModel)]="inputText"
+      placeholder="Tapez votre message..."
+      class="flex-1 p-3 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+      [disabled]="!ready || isGenerating"
+      rows="2"
+    ></textarea>
+    <button
+      (click)="sendMessage()"
+      [disabled]="!ready || isGenerating || !inputText.trim()"
+      class="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors self-end"
+    >
+      Envoyer
+    </button>
+  </div>
+
+  <p class="text-xs text-gray-400 mt-3">
+    Modèle: {{ selectedModel }} | WebLLM - Inférence locale dans le navigateur
+  </p>
+</div>

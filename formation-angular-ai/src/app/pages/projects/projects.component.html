@@ -1,0 +1,23 @@
+<div class="projects">
+  <h1 class="text-3xl font-bold text-gray-900 mb-6">Projets</h1>
+  <div *ngIf="loading" class="text-gray-600">Chargement...</div>
+  <div *ngIf="!loading && projects.length === 0" class="text-gray-600">Aucun projet trouvé.</div>
+  <div *ngIf="!loading && projects.length > 0" class="bg-white shadow overflow-hidden rounded-md">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nom</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Statut</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let project of projects">
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ project.name }}</td>
+          <td class="px-6 py-4 text-sm text-gray-500">{{ project.description || '-' }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">actif</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
